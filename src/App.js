@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import Card from './components/card';
 import Header from './components/header';
+import Drawer from './components/drawer';
 
 export default function App() {
 	const [sneakers, setSneakers] = useState([]);
+	const [opened, setOpened] = useState(false);
 
 	useEffect(() => {
 		fetch('https://649178b12f2c7ee6c2c84676.mockapi.io/sneakers')
@@ -16,9 +18,10 @@ export default function App() {
 	}, []);
 
 	return (
-		<div className='bg-blue-100 py-20'>
-			<div className='max-w-[1080px] mx-auto rounded-xl bg-white shadow-xl'>
-				<Header />
+		<>
+			<Drawer opened={opened} onClose={() => setOpened(false)} />
+			<div className='max-w-[1080px] mx-auto my-12 rounded-xl bg-white shadow-xl'>
+				<Header onClickCart={() => setOpened(true)} />
 				<main className='px-14'>
 					<div className='flex justify-between items-center'>
 						<h1 className='font-inter font-bold text-3xl'>All sneakers</h1>
@@ -34,6 +37,6 @@ export default function App() {
 					</div>
 				</main>
 			</div>
-		</div>
+		</>
 	);
 }

@@ -1,4 +1,4 @@
-const Header = () => {
+const Header = ({ onClickCart }) => {
 	return (
 		<header className='border-b px-14 py-10'>
 			<div className='flex items-center justify-between '>
@@ -10,7 +10,7 @@ const Header = () => {
 					</div>
 				</a>
 				<nav className='flex gap-7'>
-					<div className='flex gap-3'>
+					<div className='flex gap-3 cursor-pointer' onClick={onClickCart}>
 						<img src='images/cart.svg' alt='Cart' />
 						<span className='font-inter text-sm font-semibold text-gray-700'>1205$</span>
 					</div>
