@@ -21,10 +21,10 @@ export default function App() {
 		<>
 			<Drawer opened={opened} onClose={() => setOpened(false)} />
 			<div className='max-w-[1080px] mx-auto my-12 rounded-xl bg-white shadow-xl'>
-				<Header onClickCart={() => setOpened(true)} />
+				<Header onOpen={() => setOpened(true)} />
 				<main className='px-14'>
 					<div className='flex justify-between items-center'>
-						<h1 className='font-inter font-bold text-3xl'>All sneakers</h1>
+						<h1 className='font-bold text-3xl'>All sneakers</h1>
 						<div className='flex items-center gap-3 px-4 py-2 border rounded-lg'>
 							<img src='/images/search.svg' alt='Search' />
 							<input className='' placeholder='Search...' />

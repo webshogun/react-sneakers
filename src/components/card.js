@@ -1,6 +1,6 @@
 const Card = ({ img, name, price }) => {
 	return (
-		<div className=' border rounded-3xl p-4 w-[210px] h-[260px]'>
+		<div className='border rounded-3xl p-4 w-[210px] h-[260px]'>
 			<img className='mx-auto' width={133} height={112} src={`/images/sneakers/${img}.jpg`} alt='Sneakers' />
 			<h5 className='py-2'>{name}</h5>
 			<div className='flex items-center justify-between'>
