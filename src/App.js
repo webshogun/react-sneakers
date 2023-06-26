@@ -1,42 +1,36 @@
-import { useState, useEffect } from 'react';
-import Card from './components/card';
+import { useState, useEffect, createContext } from 'react';
 import Header from './components/header';
 import Drawer from './components/drawer';
+import { Outlet } from 'react-router-dom';
+
+export const AppContext = createContext({});
 
 export default function App() {
-	const [sneakers, setSneakers] = useState([]);
 	const [opened, setOpened] = useState(false);
+	const [sneakers, setSneakers] = useState([]);
 
 	useEffect(() => {
-		fetch('https://649178b12f2c7ee6c2c84676.mockapi.io/sneakers')
-			.then((response) => {
-				return response.json();
-			})
-			.then((data) => {
-				setSneakers(data);
-			});
+		try {
+			fetch('https://649178b12f2c7ee6c2c84676.mockapi.io/sneakers')
+				.then((response) => {
+					return response.json();
+				})
+				.then((data) => {
+					setSneakers(data);
+				});
+		} catch (error) {
+			alert('Error when requesting data ;(');
+			console.error(error);
+		}
 	}, []);
 
 	return (
-		<>
+		<AppContext.Provider value={sneakers}>
 			<Drawer opened={opened} onClose={() => setOpened(false)} />
 			<div className='max-w-[1080px] mx-auto my-12 rounded-xl bg-white shadow-xl'>
 				<Header onOpen={() => setOpened(true)} />
-				<main className='px-14'>
-					<div className='flex justify-between items-center'>
-						<h1 className='font-bold text-3xl'>All sneakers</h1>
-						<div className='flex items-center gap-3 px-4 py-2 border rounded-lg'>
-							<img src='/images/search.svg' alt='Search' />
-							<input className='' placeholder='Search...' />
-						</div>
-					</div>
-					<div className='flex flex-wrap gap-10 py-6 justify-center'>
-						{sneakers?.map((item) => (
-							<Card key={item.id} img={item.id} price={item.price} name={item.name} />
-						))}
-					</div>
-				</main>
+				<Outlet />
 			</div>
-		</>
+		</AppContext.Provider>
 	);
 }
